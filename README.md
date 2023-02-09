@@ -22,9 +22,9 @@
 ➖ Sysprepの破壊 <br>
 ➖ sfc/scannowコマンドは使用しないでください
 
-## 必須条件
+## 必要なツール
 
-• NTFSアクセス <br>
+• NTFS Access <br>
 • Install_Wim_Tweak.exe <br>
 • DISM++ (任意ですが推奨) <br>
 • WinAeroTweaker <br>
@@ -146,7 +146,7 @@ PowerShellで以下を入力:
 Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
 ```
 
-### Sticky Notes
+### Sticky Note
 PowerShellで以下を入力:<br>
 ```
 Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
@@ -326,7 +326,7 @@ In ProgramData\Microsoft delete every folder related to Windows Defender
 
 ![Screenshot (11)](https://user-images.githubusercontent.com/85176292/132126653-1cbec29b-4c31-49f0-b596-b230913f4f30.png)
 
-### Windows Defender (Windows Updatesを維持)
+### Windows Defender (Windows Updateを維持)
 
 Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft <br>
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData <br>
@@ -517,14 +517,14 @@ Use the batch script to disable them. <br>
 
 **NOTE : The stripping method doesn't work on 22000.184 and above builds, though the registry one does** <br>
 
-## For Build 22000.184/22454.1000 and above
+## ビルド22000.184/22454.1000とそれ以降
 
 Open WinAeroTweaker and enable the classic windows 10 start menu <br>
 sign out and sign in again to let the changes take place, and there you have the old Windows 10 start menu, after 22000.132 it's broken but before this update you can still use it . Now continue from  [Making it usable](https://github.com/TheWorldOfPC/Windows11-Debloat-Privacy-Guide#Making-it-usable) <br>
 
 ![Screenshot (1185)](https://user-images.githubusercontent.com/85176292/132989873-06223852-2fd5-41bc-b79d-293338ad7d06.png)
 
-## For Build 22000.176 and older
+## ビルド22000.176とそれ以前
 
 To remove the new taskbar you need to dualboot to any other OS or use Linux Live (any distro) <br>
 Now use NTFS Access and gain ownership of C:\Windows\SystemApps\
@@ -559,7 +559,7 @@ By removing the new start menu and taskbar files we also remove the new explorer
 ![Screenshot (3)](https://user-images.githubusercontent.com/85176292/147568962-77363296-6bb6-4a6b-a0d6-87c604cb9178.jpg)
 
 
-## Congratulations! Your copy of Windows is now Debloated & Optimized!
+## おめでとうございます! あなたのWindowsがデブロートと最適化がされました!
 Things will change in the future, and I'll do what I can to keep this guide updated. As of December 2021, this guide works on Windows 11 22000.376
 
 ## クレジット 
