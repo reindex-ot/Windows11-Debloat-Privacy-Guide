@@ -1,133 +1,133 @@
-# Windows 11 Debloat / Privacy Guide
+﻿# Windows 11 Debloat / プライバシーガイド
 
-## IMPORTANT
+## 重要事項
 
-This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, if you have no experience of such thing then you can consider this [guide](https://youtu.be/QBp1d2uhG5M) for ease. <br>
+この[ガイド](https://youtu.be/QBp1d2uhG5M)はWindows 11のブロートウェアとテレメトリを削除したい上級者ユーザー向けの説明です。<br>
 
 ![Screenshot (1)](https://user-images.githubusercontent.com/85176292/132135816-81a16539-b8b5-4d54-aaae-aa1ea66afa77.png)
 
-**Note : You're doing this at your own risk, I am not responsible for any data loss or damage that may occur.** <br>
-Last tested on Windows 11 22000.376
+**注意 : この作業は自己責任で行なってください。万が一、データの損失や損害が発生した場合でも一切の責任を負いません。** <br>
+最終テストはWindows 11で実施 22000.376
 
 ### Pros
 
-➕ Get rid of bloatware <br>
-➕ Disable most of the telemetry <br>
-➕ Gain performance <br>
-➕ Optimize Windows 11 for gaming as well as productivity <br>
-➕ Strip Windows 11 to barebones (In Advanced removal below) <br>
+➕ ブロートウェアの削除 <br>
+➕ テレメトリの無効化 <br>
+➕ パフォーマンスの向上 <br>
+➕ Windows 11をゲームと生産性の両方を最適化 <br>
+➕ Windows 11をベアボーンにストリップにする (以下の高度な削除を参照) <br>
 
-### Cons
+### 短所
 
-➖ Breaks Sysprep <br>
-➖ Don't use sfc/scannow command
+➖ Sysprepの破壊 <br>
+➖ sfc/scannowコマンドは使用しないでください
 
-## Pre-Requisite
+## 必須条件
 
-• NTFS Access <br>
+• NTFSアクセス <br>
 • Install_Wim_Tweak.exe <br>
-• DISM++ (Optional but recommended) <br>
+• DISM++ (任意ですが推奨) <br>
 • WinAeroTweaker <br>
-• Linux Live or any other OS on duablboot (if you want to strip to barebone)
+• Linux Liveまたはデュアルブート上の他のOS (ベアボーンにストリップをする場合)
 
-## Debloating Windows 11 (Just The Bloatwares)
+## Windows 11のデブローティング (ブロートウェアの削除)
 
-### Before you debloat!
-At the end of the setup process, create a local account, don't use Cortana and turn off everything in the privacy settings. <br>
+### デブロートを行なう前に!
+セットアップ後にローカルアカウントを作成し、Cortanaを使用せずにプライバシー設定をすべてオフにしてください。 <br>
 
 ![Screenshot (01)](https://user-images.githubusercontent.com/85176292/132122504-1412f80f-2bac-4671-93f0-fa5204082b59.png)
 ![Screenshot (02)](https://user-images.githubusercontent.com/85176292/132122505-95823c80-06cc-4037-a48a-7e4a2e0a904a.png)
 
-**Make sure you are doing this on a temporary user account because you'll be deleting this later on** <br>
-Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 <br>
+**後に削除をするので、一時的なアカウントでサインインをしている事を確認してください。** <br>
+「install_wim_tweak.exe」を「C:\Windows\System32」にコピー&ペーストをしてください。 <br>
 
 ![Screenshot (03)](https://user-images.githubusercontent.com/85176292/132123362-f68c5829-c739-4628-94be-7ca2dc27fb54.png)
 
-Before debloating if you have recently updated your copy of Windows 11 or just fresh installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
+Windows 11を最近アップデートをしたまたは、インストールをしたばかりの場合はデブロートを行なう前に「/resetbase」コマンドでコンポーネントストアをクリーンアップするかDISM++を使用してWinSxS内に残っているアップデート用の一時ファイルを簡単に削除する事ができるのでオススメです。<br>
 
 ![Screenshot (04)](https://user-images.githubusercontent.com/85176292/132123367-6e2ebe05-9f93-4c18-86cf-ffb1f7cc34ea.png)
 
 ![Screenshot (05)](https://user-images.githubusercontent.com/85176292/132123387-5c0b6700-0497-4561-a01f-2ba419455c46.png)
 
-**Note : If DISM++ gives error while cleaning up the component store use this command (Command Prompt as Admin Obviously)**
+**注意 : DISM++でコンポーネントストアのクリーンアップ中にエラーが発生した場合は以下のコマンドを実行します (管理者権限でコマンドプロンプトを実行)**
 
 ```
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
-After the cleanup is done you can start debloating Windows 11. <br>
-You can debloat using my debloat tool and then continue further optimization from [Finalizing](https://github.com/TheWorldOfPC/Windows11-Debloat-Privacy-Guide#finalizing) <br>
+クリーンアップが完了したら、Windows 11のデブロートが可能になります。<br>
+デブロートツールでデブロートを行ない[Finalizing](https://github.com/TheWorldOfPC/Windows11-Debloat-Privacy-Guide#finalizing)から更に最適化を続行する事ができます。 <br>
 
 ![Screenshot (1160)](https://user-images.githubusercontent.com/85176292/132950096-30fcdaf0-82f5-45bc-97df-7fe3f730e7de.png)
 
-Or you can start from here <br>
+またはここから開始できます <br>
 
-### Alarms and Clock
+### アラームとクロック
 ```
 Get-AppxPackage -AllUsers *alarms* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *people* | Remove-AppxPackage
 ```
-You can ignore any error that pops up.
+エラーが発生しても無視で問題ありません。
 
-### Calculator
-In the PowerShell, type:
+### 電卓
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
 ```
-Download Classic Calulator from [Here](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/)
+クラシックな電卓のダウンロードは[こちら](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/)
 
-### Mail, Calendar, ...
-In the PowerShell, type:
+### メールとカレンダー...
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *comm* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
 ```
 
-### Camera
-In the PowerShell, type:
+### カメラ
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
 ````
 Ignore any error that pops up
 
-### Connect
-In the command prompt, type:
+### 接続
+コマンドプロンプトで以下を入力:
 ```
 install_wim_tweak /o /c Microsoft-PPIProjection-Package /r
 ```
 
 ### Contact Support, Get Help
-In the command prompt, type:
+コマンドプロンプトで以下を入力:
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
 ```
 
-### Cortana (UWP App)
-In the powershell, type:
+### Cortana (UWPアプリ)
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
 ```
 
 ### Music, TV
-In the PowerShell, type: <br>
+PowerShellで以下を入力:<br>
 ```
 Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
 Get-WindowsPackage -Online | Where PackageName -like *MediaPlayer* | Remove-WindowsPackage -Online -NoRestart
 ```
 
-### Groove Music
-In the PowerShell, type:
+### Grooveミュージック
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
 ```
 
 ### Microsoft Solitare Collection
-In the PowerShell, type:
+PowerShellで以下を入力:
 ```
 Get-AppxPackage *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
 ```
 
 ### Office
-In the PowerShell, type:
+PowerShellで以下を入力:
 ```
 Get-AppxPackage *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage
 Get-AppxPackage *Microsoft.Office.Sway* | Remove-AppxPackage
@@ -135,31 +135,31 @@ Get-AppxPackage *Microsoft.Office.Desktop* | Remove-AppxPackage
 ```
 
 ### Get Help
-In the PowerShell, type:
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
 ```
 
-### Feedback Hub
-In the PowerShell, type:
+### フィードバックHub
+PowerShellで以下を入力:
 ```
 Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
 ```
 
 ### Sticky Notes
-In the PowerShell, type: <br>
+PowerShellで以下を入力:<br>
 ```
 Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
 ```
 
-### Maps
-In the PowerShell, type: <br>
+### マップ
+PowerShellで以下を入力:<br>
 ```
 Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
 ```
 
-### Removing Services
-In Command Prompt, type: <br>
+### サービスの削除
+コマンドプロンプトで以下を入力: <br>
 ```
 sc delete MapsBroker
 sc delete lfsvc
@@ -168,38 +168,38 @@ schtasks /Change /TN "\Microsoft\Windows\Maps\MapsToastTask" /disable
 ```
 
 ### OneNote
-In the PowerShell, type:
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *onenote* | Remove-AppxPackage
 ```
 
-### Photos
-In the PowerShell, type:
+### フォト
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *photo* | Remove-AppxPackage
 ```
 Enable Classic Photoviewer using [WinAeroTweaker](https://winaero.com/download-winaero-tweaker/)
 
-### Weather, News, ...
-In the PowerShell, type:
+### 天気、ニュース...
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
 ```
 
-### Sound Recorder
-In the PowerShell, type:
+### ボイス レコーダー
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
 ```
 Alternatives [Audacity](http://www.audacityteam.org/)
 
 ### Microsoft Quick Assist
-In the PowerShell, type:
+PowerShellで以下を入力:
 ```
 Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-WindowsPackage -Online -NoRestart
 ```
 ### OneDrive
-In the Command Promopt, type:
+コマンドプロンプトで以下を入力:
 ```
 %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
 rd "%UserProfile%\OneDrive" /s /q
@@ -209,39 +209,39 @@ rd "C:\OneDriveTemp" /s /q
 del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" /s /f /q
 ```
 
-### Your Phone
-In the PowerShell, type:
+### スマートフォン連携
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *phone* | Remove-AppxPackage
 ```
 
 ### Hello Face
-In the PowerShell, type:
+PowerShellで以下を入力:
 ```
 Get-WindowsPackage -Online | Where PackageName -like *Hello-Face* | Remove-WindowsPackage -Online -NoRestart
 ```
 
-In the command prompt, type:
+コマンドプロンプトで以下を入力:
 ```
 schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```
 
 ### Microsoft Store 
-In the PowerShell, type: <br>
+PowerShellで以下を入力: <br>
 ```
 Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 ```
 You can ignore any error that pops up.<br>
 
-In Command Prompt, type: <br>
+コマンドプロンプトで以下を入力: <br>
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ```
 
-### Removing Services (Not Recommended if you are going to use any UWP app)
+### サービスの削除 (UWPアプリを使用する場合は非推奨)
 
-In Command Prompt, type: <br>
+コマンドプロンプトで以下を入力: <br>
 ```
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v RemoveWindowsStore /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v DisableStoreApps /t REG_DWORD /d 1 /f
@@ -251,14 +251,14 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 sc delete PushToInstall
 ```
 
-### Xbox and Game DVR
-In the PowerShell, type: <br>
+### XboxとGame DVR
+PowerShellで以下を入力: <br>
 ```
 Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
 ```
 
-### Removing Services (Not Recommended if you are going to use it in future)
-In Command Prompt, type: <br>
+### サービスの削除 (使用をする場合は非推奨)
+コマンドプロンプトで以下を入力:<br>
 ```
 sc delete XblAuthManager
 sc delete XblGameSave
@@ -289,13 +289,13 @@ install_wim_tweak.exe /h /o /l
 ```
 Restart is required after this (you can restart later when you are done debloating everything)
 
-In Powershell, type:
+PowerShellで以下を入力:
 ```
 Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
 ```
 
-### Windows Defender (Breaks Windows Updates)
-In the command prompt, type:
+### Windows Defender (Windows Updatesが壊れます)
+コマンドプロンプトで以下を入力:
 ```
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
@@ -326,13 +326,13 @@ In ProgramData\Microsoft delete every folder related to Windows Defender
 
 ![Screenshot (11)](https://user-images.githubusercontent.com/85176292/132126653-1cbec29b-4c31-49f0-b596-b230913f4f30.png)
 
-### Windows Defender (Keeping Windows Updates)
+### Windows Defender (Windows Updatesを維持)
 
 Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft <br>
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData <br>
 Now disable Windows Defender through WinAeroTweaker
 
-### OPTIMIZING
+### 最適化
 
 Now since you have removed all the bloatware let's just finally delete the leftovers from C:\Program Files\WindowsApps <br>
 Take the ownership as we did above <br>
@@ -353,9 +353,9 @@ You Have Successfully Debloated Windows 11!
 
 Unfortunately there is no way to remove "Get Started App" from the start menu without breaking the new startmenu/taskbar (at least for now) so let's just pretend it's not there at all :)
 
-## Basic Tweaking
+## 基本的な調整
 
-### Removing Options from Settings Apps
+### 設定アプリのオプションを削除
 Now since you have removed the bloatware it is recommended to remove the options related to them from the settings apps <br>
 Open Regedit and go to `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer` <br>
 Create new string named 'SettingsPageVisibility' <br>
@@ -372,7 +372,7 @@ It is now possible to remove 3D Paint and 3D Print, but they forgot to remove th
 for /f "tokens=1* delims=" %I in (' reg query "HKEY_CLASSES_ROOT\SystemFileAssociations" /s /k /f "3D Edit" ^| find /i "3D Edit" ') do (reg delete "%I" /f )
 for /f "tokens=1* delims=" %I in (' reg query "HKEY_CLASSES_ROOT\SystemFileAssociations" /s /k /f "3D Print" ^| find /i "3D Print" ') do (reg delete "%I" /f )
 ```
-### Disabling Cortana
+### Cortanaの無効化
 Open our command prompt again and use this command:
 ```
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f
@@ -380,19 +380,19 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\Firewall
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
 ```
 
-### Turn off Windows Error reporting
+### Windowsのエラー報告を無効化
 In the command prompt, type:
 ```
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 ```
 
-### Windows Updates (Keeping Store Unaffected)
+### Windows Update (Storeに影響を与えない)
 By doing this you will still be able to use Windows Store (Windows Updates service will run in background) without downloading any update <br>
 Open Regedit and go to `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer` <br>
 Open the string we created earlier and type `;windowsupdate` at the end
 
-### Disabling Windows Updates (Effects Windows Store)
+### Windows Updateを無効化 (Effects Windows Store)
 By doing this you will not be able to use Microsoft Store or any other app which requires Windows Updates to be enabled
 Open Command Prompt and type:
 
@@ -406,7 +406,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v Scheduled
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v ScheduledInstallTime /t REG_DWORD /d 3 /f
 ```
 
-### Disable sync
+### 同期を無効化
 It doesn't really affect you if you're not using a Microsoft Account, but it will at least disable the Sync settings from the Settings app.
 In the command prompt, type:
 ```
@@ -414,7 +414,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSetting
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSyncUserOverride /t REG_DWORD /d 1 /f
 ```
 
-### Removing Telemetry and other unnecessary services
+### テレメトリなどの不要なサービスの削除
 In the command prompt type the following commands:
 ```
 sc delete DiagTrack
@@ -457,7 +457,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
 ```
 
-### Scheduled tasks
+### スケジュールされたタスク
 In command prompt type:
 ```
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /disable
@@ -499,17 +499,17 @@ schtasks /Change /TN "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /Change /TN "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
 del /F /Q "C:\Windows\System32\Tasks\Microsoft\Windows\SettingSync\*" 
 ```
-## Disabling Useless Services and Applying some tweaks
+## 不要なサービスを無効化とシステムの調整
 
 Use the batch script to disable some useless services and the reg file to import some tweaks <br>
 
-## Tweaks by WinAeroTweaker
+## WinAeroTweakerでのシステムの調整
 
 Simply install WinAeroTweaker and import the preset made by me (.ini file) <br>
 
 ![Screenshot (1672)](https://user-images.githubusercontent.com/85176292/147569287-a7223dc9-3081-4289-b18e-8f71507e8d02.png)
 
-## (OPTIONAL) Disabling Windows Updates & Store related services
+## (任意) Windows UpdateとStore関連サービスの無効化
 
 Use the batch script to disable them. <br>
 
@@ -562,7 +562,7 @@ By removing the new start menu and taskbar files we also remove the new explorer
 ## Congratulations! Your copy of Windows is now Debloated & Optimized!
 Things will change in the future, and I'll do what I can to keep this guide updated. As of December 2021, this guide works on Windows 11 22000.376
 
-## Credits 
+## クレジット 
 
 • This guide is based on Adolf Intel's [Windows 10 Privacy Guide](https://github.com/adolfintel/Windows10-Privacy) with many modifications to make it usable on Windows 11 <br>
 • Thanks to PPGSource#3112 from my discord server for stripping Windows 11 to barebones <br>
